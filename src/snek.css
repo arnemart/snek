@@ -1,0 +1,74 @@
+:root {
+  --bg: #c5cf00;
+  --fg: #725f02;
+}
+
+#app {
+  display: flex;
+  min-height: 95vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.snek {
+  display: grid;
+  width: 30.25rem;
+  height: 30.25rem;
+  border: 0.25rem dotted var(--fg);
+  outline: 0.25rem solid var(--bg);
+  background-color: var(--bg);
+  margin-bottom: 0.5rem;
+}
+
+.snek__message {
+  text-align: center;
+  grid-area: 4 / 2 / -4 / -2;
+}
+
+.snek__apple {
+  border: 0.25rem solid var(--fg);
+  border-radius: 50%;
+  margin: 0.25rem;
+}
+
+.snek__part {
+  background-color: var(--fg);
+  border-radius: 10%;
+  margin: 0.125rem;
+  position: relative;
+}
+
+.snek__part--head {
+  border-top-left-radius: 25%;
+  border-top-right-radius: 25%;
+}
+
+.snek__part--head::before,
+.snek__part--head::after {
+  content: "";
+  display: block;
+  width: 20%;
+  height: 20%;
+  border-radius: 100%;
+  background-color: var(--bg);
+  position: absolute;
+  top: 20%;
+  left: 20%;
+}
+
+.snek__part--head::after {
+  left: auto;
+  right: 20%;
+}
+
+.snek__part--head.snek__part--head-Right {
+  transform: rotate(90deg);
+}
+
+.snek__part--head.snek__part--head-Down {
+  transform: rotate(180deg);
+}
+
+.snek__part--head.snek__part--head-Left {
+  transform: rotate(-90deg);
+}
