@@ -1,17 +1,13 @@
-import { Dispatch, useEffect, useReducer } from "preact/hooks";
+import { useEffect, useReducer } from "preact/hooks";
 import { Action, GameState, initState, reducer } from "./gameLogic";
 
-type GameProps = {
-  game: GameState;
-  dispatch: Dispatch<Action>;
+type MessageProps = Pick<GameState, "crashed" | "score"> & {
+  start: () => void;
 };
-
-const GameMessage = ({ game, dispatch }: GameProps) => (
+const Message = ({ crashed, score, start }: MessageProps) => (
   <div class="snek__message">
-    {game.crashed && <div>Du er dau! Du fikk {game.score} poeng.</div>}
-    <button onClick={() => dispatch("Start")}>
-      {game.crashed ? "Spill igjen" : "Start spill"}
-    </button>
+    {crashed && <div>Du er dau! Du fikk {score} poeng.</div>}
+    <button onClick={start}>{crashed ? "Spill igjen" : "Start spill"}</button>
   </div>
 );
 
@@ -41,28 +37,7 @@ const Apple = ({ apple: [x, y] }: AppleProps) => (
   />
 );
 
-const GameBoard = ({ game, dispatch }: GameProps) => (
-  <div>
-    <div
-      class="snek"
-      style={{
-        gridTemplate: `repeat(${game.width}, 1fr) / repeat(${game.height}, 1fr)`,
-      }}
-    >
-      {game.running ? (
-        <>
-          <Snek snek={game.snek} direction={game.direction} />
-          <Apple apple={game.apple} />
-        </>
-      ) : (
-        <GameMessage game={game} dispatch={dispatch} />
-      )}
-    </div>
-    <div>{game.score} poeng</div>
-  </div>
-);
-
-const SnekGame = () => {
+export const SnekGame = () => {
   const [game, dispatch] = useReducer(reducer, initState());
 
   useEffect(() => {
@@ -84,7 +59,28 @@ const SnekGame = () => {
     return () => document.removeEventListener("keydown", handleKeyboard);
   }, []);
 
-  return <GameBoard game={game} dispatch={dispatch} />;
+  return (
+    <>
+      <div
+        class="snek"
+        style={{
+          gridTemplate: `repeat(${game.size}, 1fr) / repeat(${game.size}, 1fr)`,
+        }}
+      >
+        {game.running ? (
+          <>
+            <Snek snek={game.snek} direction={game.direction} />
+            <Apple apple={game.apple} />
+          </>
+        ) : (
+          <Message
+            crashed={game.crashed}
+            score={game.score}
+            start={() => dispatch("Start")}
+          />
+        )}
+      </div>
+      <div>{game.score} poeng</div>
+    </>
+  );
 };
-
-export default SnekGame;

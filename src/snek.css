@@ -3,8 +3,9 @@
   --fg: #725f02;
 }
 
-#app {
+#🐍 {
   display: flex;
+  flex-direction: column;
   min-height: 95vh;
   align-items: center;
   justify-content: center;
@@ -62,13 +63,13 @@
 }
 
 .snek__part--head.snek__part--head-Right {
-  transform: rotate(90deg);
+  transform: rotate(calc(pi * 0.5rad));
 }
 
 .snek__part--head.snek__part--head-Down {
-  transform: rotate(180deg);
+  transform: rotate(calc(pi * 1rad));
 }
 
 .snek__part--head.snek__part--head-Left {
-  transform: rotate(-90deg);
+  transform: rotate(calc(pi * 1.5rad));
 }

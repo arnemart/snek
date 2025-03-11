@@ -13,8 +13,7 @@ export type GameState = {
   score: number;
   direction: Direction;
   nextDirection: Direction;
-  width: number;
-  height: number;
+  size: number;
   snek: Snek;
   apple: Pos;
 };
@@ -48,8 +47,7 @@ export const initState = (): GameState => {
     score: 0,
     direction: "Right",
     nextDirection: "Right",
-    width: SIZE,
-    height: SIZE,
+    size: SIZE,
     snek: snek,
     apple: randomFreePosition(snek),
   };
