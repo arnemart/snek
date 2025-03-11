@@ -31,12 +31,12 @@ const Snek = ({ snek, direction }: SnekProps) => (
 );
 
 type AppleProps = Pick<GameState, "apple">;
-const Apple = ({ apple }: AppleProps) => (
+const Apple = ({ apple: [x, y] }: AppleProps) => (
   <div
     class="snek__apple"
     style={{
-      gridColumn: apple[0] + 1,
-      gridRow: apple[1] + 1,
+      gridColumn: x + 1,
+      gridRow: y + 1,
     }}
   />
 );
@@ -62,9 +62,8 @@ const GameBoard = ({ game, dispatch }: GameProps) => (
   </div>
 );
 
-type SnekGameProps = { initialGameState?: GameState };
-const SnekGame = ({ initialGameState = initState() }: SnekGameProps) => {
-  const [game, dispatch] = useReducer(reducer, initialGameState);
+const SnekGame = () => {
+  const [game, dispatch] = useReducer(reducer, initState());
 
   useEffect(() => {
     const timer = setTimeout(() => dispatch("Move"), game.delay);

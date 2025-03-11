@@ -1,15 +1,12 @@
 {
   "dependencies": {
-    "@preact/preset-vite": "^2.10.1",
     "preact": "^10.26.4",
     "typescript": "^5.8.2",
     "vite": "^6.2.1"
   },
   "scripts": {
     "start": "vite",
-    "build": "vite build",
-    "prebuild": "npm run clean",
-    "clean": "rm -rf dist/*"
+    "build": "vite build"
   },
   "prettier": {}
 }

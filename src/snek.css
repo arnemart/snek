@@ -26,15 +26,15 @@
 }
 
 .snek__apple {
-  border: 0.25rem solid var(--fg);
+  background-color: var(--fg);
   border-radius: 50%;
-  margin: 0.25rem;
+  margin: 20%;
 }
 
 .snek__part {
   background-color: var(--fg);
   border-radius: 10%;
-  margin: 0.125rem;
+  margin: 5%;
   position: relative;
 }
 
